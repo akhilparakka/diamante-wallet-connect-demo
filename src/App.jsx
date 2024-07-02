@@ -46,7 +46,7 @@ function App() {
       // Build a transaction for payment operation
       const transaction = new TransactionBuilder(sourceAccount, {
         fee: BASE_FEE,
-        networkPassphrase: Networks.TESTNET,
+        networkPassphrase: "Diamante Testnet",
       })
         .addOperation(
           Operation.payment({
@@ -62,7 +62,7 @@ function App() {
       const xdr = transaction.toXDR("base64");
 
       // Sign the transaction using the wallet
-      const resp = await window.diam.sign(xdr, true, Networks.TESTNET);
+      const resp = await window.diam.sign(xdr, true, "Diamante Testnet");
 
       if (resp.response.status === 200) {
         const issuerKeypair = Keypair.random();
@@ -90,14 +90,14 @@ function App() {
 
           const transaction = new TransactionBuilder(receiverAddress, {
             fee: BASE_FEE,
-            networkPassphrase: Networks.TESTNET,
+            networkPassphrase: "Diamante Testnet",
           })
             .addOperation(Operation.changeTrust({ asset }))
             .setTimeout(0)
             .build();
 
           const xdr = transaction.toXDR("base64");
-          const resp = await window.diam.sign(xdr, true, Networks.TESTNET);
+          const resp = await window.diam.sign(xdr, true, "Diamante Testnet");
 
           if (resp.response.status === 200) {
             // Issue the asset to the public key
